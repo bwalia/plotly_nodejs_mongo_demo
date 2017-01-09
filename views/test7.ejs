@@ -1,0 +1,114 @@
+<html>
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<label>Select Area : </label>
+<select id="area" onChange="loadChart7Data()">
+	<option value="K04000001" selected>England and Wales</option>
+	<option value="E92000001">England</option>
+	<option value="E12000001">North East</option>
+	<option value="E06000047">County Durham UA</option>
+	<option value="E12000002">NORTH WEST </option>
+	<option value="E12000003">YORKSHIRE AND THE HUMBER</option>
+	<option value="E12000004">EAST MIDLANDS</option>
+	<option value="E12000005">WEST MIDLANDS</option>
+	<option value="E12000007">LONDON</option>
+	<option value="E12000008">SOUTH EAST</option>
+	<option value="E12000009">SOUTH WEST</option>
+	<option value="W92000004">WALES</option>
+</select>
+<label>Display As : </label>
+<select id="display" onChange="loadChart7Data()">
+	<option value="Count" selected>Total Count</option>
+	<option value="Percentage">Percentage</option>
+</select>
+
+<h3>UK 2011 <span class="locName">England and Wales</span> - Key stats</h3>
+
+
+<h4>Age Structure</h3>
+<h5>X - axis - Age (in years)</h5>
+<h5>Y - axis - No. of persons (in millions)</h5>
+<p>This table provides information about the age structure, total count of persons of different age groups of <span class="locName">England and Wales</span> as at census day, 27 March 2011.
+</p>
+
+<div id="myDiv" style="width: 1400px; height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>
+var count=0, contentArr7=[], locNameStr="", displayAs="", columnsNameArr=[] ;
+$(document).ready(function() {
+	loadChart7Data();
+	setInterval(generateChart7, 1);	
+});
+function generateChart7(){
+	var data=[],yArr=[]; 
+	//console.log(contentArr7);
+	$.each(contentArr7, function(i ,row){
+		if(count!=0){
+			row=parseInt(row)+parseInt(getRandomizer());
+		}
+		yArr.push(row);
+	});
+	contentArr7=yArr;
+	var trace= {
+    	x: columnsNameArr,
+    	y: yArr,
+		marker:{
+    		color: ['rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', , 'rgba(0,0,255,0.3)', 'rgba(255,255,0,0.3)', 'rgba(192,192,192,0.3)', 'rgba(255,0,255,0.3)', 'rgba(0,128,0,0.6)', 'rgba(0,255,255,0.2)', 'rgba(128,128,0,0.3)' , 'rgba(0,0,255,0.6)', 'rgba(128,0,128,0.9)','rgba(0,0,128,0.1)', 'rgba(0,0,128,0.4)',  'rgba(0,255,0,0.9)','rgba(255,0,0,0.8)']
+  		},
+    	type: 'bar'
+  	}
+  	
+  	data.push(trace);
+  			
+  	var layout = {
+  		title: locNameStr+': Age Structure',
+  		yaxis: {
+    		title: displayAs,
+  		}
+ 	};
+ 	$("#myDiv").html("");
+	Plotly.newPlot('myDiv', data, layout);
+	count++;
+}
+
+function getRandomizer() {
+	var bottom=500000, top=1000000;
+	if(displayAs=="Percentage"){
+		var bottom=2, top=10;
+	}
+	
+	return Math.floor( Math.random() * ( 1 + top - bottom ) ) + bottom;
+}
+function loadChart7Data(){
+	contentArr7=[];
+	count=0;
+	locNameStr=$("#area :selected").text();
+	$(".locName").html(locNameStr);
+	displayAs=$("#display").val();
+	var jsonRow="/search-results?area="+$("#area").val()+"&searchby="+displayAs;
+	$.getJSON(jsonRow,function(response){
+		if(response.error){
+			//
+		}else{
+			var columnsValArr=[];
+			$.each(response.columnDetails, function(i ,row){
+				columnsNameArr.push(row["ColumnVariableDescription"]);
+				columnsValArr.push(row["ColumnVariableCode"]);
+			});
+			$.each(response.aaData, function(index ,value){
+				if(columnsValArr.indexOf(index) != -1){  
+					contentArr7.push(value);
+				}
+			});
+			
+			generateChart7();
+		}
+	});
+}
+</script>
+</body>
+</html>

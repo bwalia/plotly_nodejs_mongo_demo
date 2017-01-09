@@ -1,0 +1,49 @@
+<html>
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<h3>UK 2011 England and Wales - Key stats</h3>
+<h4>Age Structure</h3>
+<h5>X - axis - Age (in years)</h5>
+<h5>Y - axis - No. of persons (in millions)</h5>
+<p>This table provides information about the age structure, mean and median ages of usual residents of England and Wales as at census day, 27 March 2011.
+</p>
+
+<div id="tester" style="width:90%;height:250px;"></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>
+
+Plotly.d3.json('', function(){
+
+var trace1 = {
+  x: ['All categories: Age','Age 0 to 4','Age 5 to 7','Age 8 to 9','Age 10 to 14','Age 15','Age 16 to 17','Age 18 to 19','Age 20 to 24','Age 25 to 29','Age 30 to 44','Age 45 to 59','Age 60 to 64','Age 65 to 74','Age 75 to 84','Age 85 to 89','Age 90 and over','Mean age','Median age'],
+  y: [56075912,3496750,1927039,1208672,3258677,687994,1391235,1460156,3807245,3836609,11515165,10886135,3377162,4852833,3115552,825671,429017,39.371873791370525,39],
+  mode: 'markers',
+  marker: {
+    color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
+    size: 12
+  }
+};
+
+var data = [trace1];
+
+var layout = {
+  title: 'Age Structure (Key stats)',
+  showlegend: false,
+  height: 800,
+  width: 880
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+
+});
+
+</script>
+
+<div id="myDiv" style="width: 800px; height: 800px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<h3>UK 2011 England and Wales - Key stats</h3>
+<h4>Age Structure</h3>
+<h5>X - axis - Age (in years)</h5>
+<h5>Y - axis - No. of persons (in millions)</h5>
+<p>This table provides information about the age structure, total count of persons of different age groups of England and Wales as at census day, 27 March 2011.
+</p>
+
+<div id="myDiv" style="width: 1400px; height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+<br>
+<h5>X - axis - Age (in years)</h5>
+<h5>Y - axis - No. of persons (in percentage)</h5>
+<p>This table provides information about the age structure, displaying percentage of total number of persons of different age groups of England and Wales as at census day, 27 March 2011.
+</p>
+<div id="plot2" style="width: 1400px; height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script>
+
+	
+Plotly.d3.csv('data/KS102EWDATA.CSV', function(err, rows){
+var data1=[], data2=[];
+var matchArr1=["KS102EW0002","KS102EW0003","KS102EW0004","KS102EW0005","KS102EW0006","KS102EW0007","KS102EW0008","KS102EW0009","KS102EW0010","KS102EW0011","KS102EW0012","KS102EW0013","KS102EW0014","KS102EW0015","KS102EW0016","KS102EW0017"];
+var matchArr2=["KS102EW0020", "KS102EW0021","KS102EW0022","KS102EW0023","KS102EW0024","KS102EW0025","KS102EW0026","KS102EW0027","KS102EW0028","KS102EW0029","KS102EW0030","KS102EW0031","KS102EW0032","KS102EW0033","KS102EW0034","KS102EW0035"];
+	$.each(rows, function(i, row){
+		if(row['GeographyCode']=="K04000001"){
+			var xArr1=[], yArr1=[], xArr2=[], yArr2=[];
+			$.each(row, function(index, value){
+				if(matchArr1.indexOf(index) != -1){  
+   					xArr1.push(index);
+					yArr1.push(value);
+				}
+				if(matchArr2.indexOf(index) != -1){  
+   					xArr2.push(index);
+					yArr2.push(value);
+				}
+			});
+			var trace1= {
+    			x: ["Age 0 to 4", "Age 5 to 7", "Age 8 to 9", "Age 10 to 14", "Age 15", "Age 16 to 17", "Age 18 to 19", "Age 20 to 24", "Age 25 to 29", "Age 30 to 44", "Age 45 to 59", "Age 60 to 64", "Age 65 to 74", "Age 75 to 84", "Age 85 to 89", "Age 90 and over"],
+    			y: yArr1,
+    			name: 'Count',
+    			type: 'bar'
+  			}
+  			data1.push(trace1);
+  			var trace2= {
+    			x: ["Age 0 to 4", "Age 5 to 7", "Age 8 to 9", "Age 10 to 14", "Age 15", "Age 16 to 17", "Age 18 to 19", "Age 20 to 24", "Age 25 to 29", "Age 30 to 44", "Age 45 to 59", "Age 60 to 64", "Age 65 to 74", "Age 75 to 84", "Age 85 to 89", "Age 90 and over"],
+    			y: yArr2,
+    			name: 'Percentage',
+    			type: 'bar',
+    			marker: {
+    				color: 'rgb(142,124,195)'
+ 				}
+  			}
+  			data2.push(trace2);
+		}
+	});
+	var layout1 = {
+  		title: 'England and Wales: Age Structure (in millions)',
+  		yaxis: {
+    		title: 'Count (Millions)',
+  		}
+ 	};
+ 	var layout2 = {
+  		title: 'England and Wales: Age Structure (Percentage)',
+  		yaxis: {
+    		title: 'Percentage',
+  		}
+ 	};
+	Plotly.newPlot('myDiv', data1, layout1);
+	Plotly.newPlot('plot2', data2, layout2);
+});
+
+
+
+</script>
+</body>
+</html>

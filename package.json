@@ -1,0 +1,17 @@
+{
+  "name": "charts-app",
+  "version": "1.0.0",
+  "description": "charts",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.5"
+  }
+}
