@@ -1,11 +1,31 @@
-<html>
-<head>
+<% include include/main-header %>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">	
+ <div class="wrapper">
+<% include include/header %>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <% include include/sidebar %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        UK 2011 <span class="locNameChart1Data">England and Wales</span>
+        <small>Key stats</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Bubble Chart</li>
+      </ol>
+    </section>
+
+      <section class="content">
 <label>Select Area : </label>
-<select id="areaChart1Data" onChange="loadChart1Data()">
+<select id="areaChart1Data" onChange="loadChart1Data()" class="form-control">
 	<option value="K04000001" selected>England and Wales</option>
 	<option value="E92000001">England</option>
 	<option value="E12000001">North East</option>
@@ -20,21 +40,21 @@
 	<option value="W92000004">WALES</option>
 </select>
 <label>Display As : </label>
-<select id="displayChart1Data" onChange="loadChart1Data()">
+<select id="displayChart1Data" onChange="loadChart1Data()" class="form-control">
 	<option value="Count" selected>Total Count</option>
 	<option value="Percentage">Percentage</option>
 </select>
 
-<h3>UK 2011 <span class="locNameChart1Data">England and Wales</span> - Key stats</h3>
-<h4>Age Structure (Bubble Chart)</h3>
+<h2>Age Structure (Bubble Chart)</h2>
 <h5>X - axis - Age (in years)</h5>
 <h5>Y - axis - No. of persons (in millions)</h5>
 <p>This table provides information about the age structure, bubble chart of different age groups of <span class="locNameChart1Data">England and Wales</span> as at census day, 27 March 2011.
 </p>
 
 <div id="Chart1Data" style="width: 1400px; height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</section>
+</div>
+ <% include include/footer %>
 <script>
 $(document).ready(function() {
 	loadChart1Data();

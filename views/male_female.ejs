@@ -7,14 +7,34 @@ if (typeof queryStr.code !== 'undefined' && queryStr.code !== null && queryStr.c
 geoCode=queryStr.code;
 }
 %>
-<html>
-<head>
+<% include include/main-header %>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">	
+ <div class="wrapper">
+<% include include/header %>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <% include include/sidebar %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        UK 2011 <span class="locName"></span>
+        <small>Key stats</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Pie Chart</li>
+      </ol>
+    </section>
+
+      <section class="content">
 <label>Select Area : </label>
-<select id="areaChart2Data" onChange="generate_chart()">
+<select id="areaChart2Data" onChange="generate_chart()" class="form-control">
 	<option value="K04000001" selected>England and Wales</option>
 	<option value="E92000001">England</option>
 	<option value="E12000001">North East</option>
@@ -28,13 +48,15 @@ geoCode=queryStr.code;
 	<option value="E12000009">SOUTH WEST</option>
 	<option value="W92000004">WALES</option>
 </select>
-<h3>UK 2011 <span class="locName"></span> - Key stats</h3>
+
 <h4>Age Structure (Pie Chart)</h3>
 <p>This table provides information about the age structure, pie chart of different age groups of <span class="locName"></span> as at census day, 27 March 2011.
 </p>
 
-<div id="myDiv" style="width: 1400px; height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<div id="myDiv" style="height: 600px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+</section>
+</div>
+ <% include include/footer %>
 <script>
 var matchArr2=["KS101EW0002", "KS101EW0003"];
 var contentArr="";

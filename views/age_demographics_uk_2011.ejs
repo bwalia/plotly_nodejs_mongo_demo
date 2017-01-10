@@ -1,15 +1,33 @@
-<html>
-<head>
+<% include include/main-header %>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-<body>
+ </head>
+ <body class="hold-transition skin-blue sidebar-mini">	
+ <div class="wrapper">
+<% include include/header %>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <% include include/sidebar %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <section class="content-header">
+      <h1>
+        Chart
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Chart</li>
+      </ol>
+    </section>
 <p>
     Here's a simple Plotly plot - 
     <a href="http://bit.ly/1Or9igj">plotly.js documentation</a>
 </p>
 
 <div id="tester" style="width:90%;height:250px;"></div>
+</div>
+ <% include include/footer %>
 <script>
 	
 Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv', function(err, rows){

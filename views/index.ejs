@@ -1,18 +1,444 @@
-<html>
-<head>
-</head>
-<body>
-<h1>Task - 1</h1>
+<% include include/main-header %>
+<!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ </head>
+ <body class="hold-transition skin-blue sidebar-mini">	
+ <div class="wrapper">
+<% include include/header %>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <% include include/sidebar %>
 
-<p>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/chart.html">Dashboard</a></br>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/test1">Sub task 1</a></br>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/test2">Sub task 2</a></br>
-    <a target="_blank" href="http://task1.tenthmatrix.co.uk/male_female">Age Structure - England and Wales March 2011 (Male/Females)</a></br>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/test4">Age Structure - England and Wales March 2011 (Person count by regions)</a></br>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/test6">Age Structure - England and Wales March 2011 (Percentage by UK regions)</a></br>
-    <a target="_blank" href="https://task1.tenthmatrix.co.uk/test7">Age Structure - England and Wales March 2011 (Dynamically increasing total count)</a></br>
-</p>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        UK Census Age Structures 2011
+        <small>Age Structure - England and Wales March 2011</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/index"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Data Interpretation & Visualisation Tool</li>
+      </ol>
+    </section>
+
+
+ 
+   
+      <section class="content">
+      
+      
+      <div class="row">
+        <div class="col-md-6">
+        
+           <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Key Stats</h3>
+              <p>To view increasing population in real time (in simulation mode), click on VIEW ENLARGED CHART link below.</p>
+			<p>
+		Age Structure Data Analysis Tool shows how real time information is retrieved from MongoDB server which is updated constantly and then represented to users instantly. In order to simulate the real time information updates I randomly add a few hundred thousands of persons in existing real 2011 census data in mongo and then reload the charts and queries. <a target="_blank" href="/test7">VIEW ENLARGED CHART</a>
+		</p><div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+             <label>Select Area : </label>
+<select class="form-control" id="area" onChange="loadChart7Data()">
+	<option value="K04000001" selected>England and Wales</option>
+	<option value="E92000001">England</option>
+	<option value="E12000001">North East</option>
+	<option value="E06000047">County Durham UA</option>
+	<option value="E12000002">NORTH WEST </option>
+	<option value="E12000003">YORKSHIRE AND THE HUMBER</option>
+	<option value="E12000004">EAST MIDLANDS</option>
+	<option value="E12000005">WEST MIDLANDS</option>
+	<option value="E12000007">LONDON</option>
+	<option value="E12000008">SOUTH EAST</option>
+	<option value="E12000009">SOUTH WEST</option>
+	<option value="W92000004">WALES</option>
+</select>
+<label>Display As : </label>
+<select class="form-control" id="display" onChange="loadChart7Data()">
+	<option value="Count" selected>Total Count</option>
+	<option value="Percentage">Percentage</option>
+</select>
+            </div>
+            
+            <div class="box-body">
+              <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+            </div>
+          
+          </div>
+        </div>
+        <div class="col-md-6">
+          
+
+          <div class="box box-success">
+            <div class="box-header with-border">
+            <h3 class="box-title">Age Structure (Pie Chart)</h3>
+              <p>Age Structure - England and Wales March 2011 (Percentage by UK regions, Pie chart - user can click on each slice and legend items to show hide) <a target="_blank" href="/test6">VIEW ENLARGED CHART</a>
+		</p>
+		<p>Click on the legend items to hide or show the relevant information.</a>
+		</p>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+                            <label>Select Area : </label>
+<select class="form-control" id="areaChart6Data" onChange="loadChart6Data()">
+	<option value="K04000001" selected>England and Wales</option>
+	<option value="E92000001">England</option>
+	<option value="E12000001">North East</option>
+	<option value="E06000047">County Durham UA</option>
+	<option value="E12000002">NORTH WEST </option>
+	<option value="E12000003">YORKSHIRE AND THE HUMBER</option>
+	<option value="E12000004">EAST MIDLANDS</option>
+	<option value="E12000005">WEST MIDLANDS</option>
+	<option value="E12000007">LONDON</option>
+	<option value="E12000008">SOUTH EAST</option>
+	<option value="E12000009">SOUTH WEST</option>
+	<option value="W92000004">WALES</option>
+</select>
+<label>Display As : </label>
+<select class="form-control" id="displayChart6Data" onChange="loadChart6Data()">
+	<option value="Count" selected>Total Count</option>
+	<option value="Percentage">Percentage</option>
+</select>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div id="Chart6Data" ><!-- Plotly chart will be drawn inside this DIV --></div>
+
+              </div>
+            </div>
+          
+          </div>
+         
+        </div>
+        
+      
+      </div>
+      
+	  <div class="row">
+        <div class="col-md-6">
+        
+           <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Pie Chart (Males/Females)</h3>
+				<p>This table provides information about the age structure, pie chart of different age groups of <span class="locName"></span> as at census day, 27 March 2011. <a target="_blank" href="/male_female">VIEW ENLARGED CHART</a></p>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              <select class="form-control" id="area" onChange="generateChart2()">
+	<option value="K04000001" selected>England and Wales</option>
+	<option value="E92000001">England</option>
+	<option value="E12000001">North East</option>
+	<option value="E06000047">County Durham UA</option>
+	<option value="E12000002">NORTH WEST </option>
+	<option value="E12000003">YORKSHIRE AND THE HUMBER</option>
+	<option value="E12000004">EAST MIDLANDS</option>
+	<option value="E12000005">WEST MIDLANDS</option>
+	<option value="E12000007">LONDON</option>
+	<option value="E12000008">SOUTH EAST</option>
+	<option value="E12000009">SOUTH WEST</option>
+	<option value="W92000004">WALES</option>
+</select>
+            </div>
+            
+            <div class="box-body">
+              <div id="myDiv1" ><!-- Plotly chart will be drawn inside this DIV --></div>
+            </div>
+          
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          
+
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Age Structure - England and Wales March 2011 (Males/Females ) : Person count by regions</h3>
+			<p>This table provides information about the age structure, pie chart of different age groups of <span class="locName"></span> as at census day, 27 March 2011. (Bubble chart fully interactive) <a target="_blank" href="/test1">VIEW ENLARGED CHART</a>
+		</p>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+                            <select class="form-control" id="areaChart1Data" onChange="loadChart1Data()">
+	<option value="K04000001" selected>England and Wales</option>
+	<option value="E92000001">England</option>
+	<option value="E12000001">North East</option>
+	<option value="E06000047">County Durham UA</option>
+	<option value="E12000002">NORTH WEST </option>
+	<option value="E12000003">YORKSHIRE AND THE HUMBER</option>
+	<option value="E12000004">EAST MIDLANDS</option>
+	<option value="E12000005">WEST MIDLANDS</option>
+	<option value="E12000007">LONDON</option>
+	<option value="E12000008">SOUTH EAST</option>
+	<option value="E12000009">SOUTH WEST</option>
+	<option value="W92000004">WALES</option>
+</select>
+<label>Display As : </label>
+<select class="form-control" id="displayChart1Data" onChange="loadChart1Data()">
+	<option value="Count" selected>Total Count</option>
+	<option value="Percentage">Percentage</option>
+</select>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div id="Chart1Data" ><!-- Plotly chart will be drawn inside this DIV --></div>
+
+              </div>
+            </div>
+          
+          </div>
+         
+        </div>
+      
+      </div>
+    </section>
+	
+  </div>
+ <% include include/footer %>
+<script>
+
+//chart 1
+var count=0, contentArr7=[], locNameStr="", displayAs="", columnsNameArr=[] ;
+$(document).ready(function() {
+	loadChart7Data();
+	generateChart7();//setInterval(generateChart7, 1000);	
+	loadChart1Data();
+	loadChart6Data();
+});
+function generateChart7(){
+	var data=[],yArr=[]; 
+	//console.log(contentArr7);
+	$.each(contentArr7, function(i ,row){
+		if(count!=0){
+			row=parseInt(row)+parseInt(getRandomizer());
+		}
+		yArr.push(row);
+	});
+	contentArr7=yArr;
+	var trace= {
+    	x: columnsNameArr,
+    	y: yArr,
+		marker:{
+    		color: ['rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', , 'rgba(0,0,255,0.3)', 'rgba(255,255,0,0.3)', 'rgba(192,192,192,0.3)', 'rgba(255,0,255,0.3)', 'rgba(0,128,0,0.6)', 'rgba(0,255,255,0.2)', 'rgba(128,128,0,0.3)' , 'rgba(0,0,255,0.6)', 'rgba(128,0,128,0.9)','rgba(0,0,128,0.1)', 'rgba(0,0,128,0.4)',  'rgba(0,255,0,0.9)','rgba(255,0,0,0.8)']
+  		},
+    	type: 'bar'
+  	}
+  	
+  	data.push(trace);
+  			
+  	var layout = {
+  		title: locNameStr+': Age Structure',
+  		yaxis: {
+    		title: displayAs,
+  		}
+ 	};
+ 	$("#myDiv").html("");
+	Plotly.newPlot('myDiv', data, layout);
+	count++;
+}
+
+function getRandomizer() {
+	var bottom=500000, top=1000000;
+	if(displayAs=="Percentage"){
+		var bottom=2, top=10;
+	}
+	
+	return Math.floor( Math.random() * ( 1 + top - bottom ) ) + bottom;
+}
+function loadChart7Data(){
+	contentArr7=[];
+	count=0;
+	locNameStr=$("#area :selected").text();
+	$(".locName").html(locNameStr);
+	displayAs=$("#display").val();
+	//alert(displayAs);
+	
+	var jsonRow="search-results?area="+$("#area").val()+"&searchby="+displayAs;
+	$.getJSON(jsonRow,function(response){
+		if(response.error){
+			//
+		}else{
+			var columnsValArr=[];
+			$.each(response.columnDetails, function(i ,row){
+				columnsNameArr.push(row["ColumnVariableDescription"]);
+				columnsValArr.push(row["ColumnVariableCode"]);
+			});
+			$.each(response.aaData, function(index ,value){
+				if(columnsValArr.indexOf(index) != -1){  
+					contentArr7.push(value);
+				}
+			});
+			
+			generateChart7();
+		}
+	});
+}
+
+//chart 1
+
+//chart 2
+
+var matchArr2=["KS101EW0002", "KS101EW0003"];
+var contentArr="";
+function generateChart2(){
+	var locNameStr=$("#area :selected").text();
+	$(".locName").html(locNameStr);
+	var data2=[];
+	var codeStr=$("#area").val();
+	$.each(contentArr, function(i, row){
+		if(row['GeographyCode']==codeStr){
+			var yArr2=[];
+			$.each(row, function(index, value){
+				if(matchArr2.indexOf(index) != -1){  
+   					yArr2.push(value);
+				}
+			});
+			
+  			var trace2= {
+    			labels: ["Male", "Female"],
+    			values: yArr2,
+    			type: 'pie'
+  			}
+  			data2.push(trace2);
+		}
+	});
+	
+ 	var layout2 = {
+ 		height: 500,
+  		width: 700
+	};
+	Plotly.newPlot('myDiv1', data2, layout2);
+}
+
+
+Plotly.d3.csv('data/KS101EWDATA.CSV', function(err, rows){
+	contentArr=rows;
+	generateChart2();
+});
+//chart 2
+
+
+//chart 3
+
+function sortNumber(a,b) {
+    return a - b;
+}
+function loadChart1Data(){
+	var locNameStr=$("#area :selected").text();
+	$(".locNameChart1Data").html(locNameStr);
+	var area=$("#areaChart1Data").val();
+	var displayAs=$("#displayChart1Data").val();
+	var jsonRow="/search-results?area="+area+"&searchby="+displayAs;
+	$.getJSON(jsonRow,function(response){
+		if(response.error){
+			//
+		}else{
+			var columnsValArr=[];
+			$.each(response.columnDetails, function(i ,row){
+				if(row["ColumnVariableCode"]!="KS102EW0001"){
+					columnsValArr.push(row["ColumnVariableCode"]);
+				}
+			});
+			
+			var data=[], yArr=[], valueArr=[],sizeArr=[];
+			$.each(response.aaData, function(index ,value){
+				if(columnsValArr.indexOf(index) != -1){  
+   					yArr.push(value);
+   					valueArr.push(value);
+				}
+			});
+			
+			var newArr={};
+			valueArr= valueArr.sort(sortNumber);
+			$.each(valueArr, function(index ,value){
+				newArr[value]=index;
+			});	
+		
+			$.each(yArr, function(i ,row){
+				var sizeNum=parseInt(newArr[row])*5;
+				sizeArr.push(sizeNum);
+			});	
+			
+			var trace = {
+  				x: [0, 4, 7, 9, 14, 15, 17, 19, 24, 29, 44, 59, 64, 74, 84, 89, 100],
+  				y: yArr,
+  				marker: {
+    				color: ['rgba(222,45,38,0.8)', 'rgba(204,204,204,1)', , 'rgba(0,0,255,0.3)', 'rgba(255,255,0,0.3)', 'rgba(192,192,192,0.3)', 'rgba(255,0,255,0.3)', 'rgba(0,128,0,0.6)', 'rgba(0,255,255,0.2)', 'rgba(128,128,0,0.3)' , 'rgba(0,0,255,0.6)', 'rgba(128,0,128,0.9)','rgba(0,0,128,0.1)', 'rgba(0,0,128,0.4)',  'rgba(0,255,0,0.9)','rgba(255,0,0,0.8)'],
+   			 		size: sizeArr
+   			 	},
+  				mode: 'markers'
+			};
+			
+  			data.push(trace);
+  			var layout = {
+  				xaxis: {title: 'Age'},
+  				yaxis: {title: displayAs},
+  				margin: {t: 20},
+  				hovermode: 'closest'
+			};
+
+			Plotly.newPlot('Chart1Data', data, layout);
+		}
+	});
+}
+//chart 3
+
+//chart 6
+
+function loadChart6Data(){
+	var locNameStr=$("#area :selected").text();
+	$(".locName").html(locNameStr);
+	var area=$("#areaChart6Data").val();
+	var displayAs=$("#displayChart6Data").val();
+	var jsonRow="/search-results?area="+area+"&searchby="+displayAs;
+	$.getJSON(jsonRow,function(response){
+		if(response.error){
+			//
+		}else{
+			var columnsValArr=[], columnsNameArr=[];
+			$.each(response.columnDetails, function(i ,row){
+				if(row["ColumnVariableCode"]!="KS102EW0001"){
+					columnsNameArr.push(row["ColumnVariableDescription"]);
+					columnsValArr.push(row["ColumnVariableCode"]);
+				}
+			});
+			
+			var data=[], yArr=[];
+			$.each(response.aaData, function(index ,value){
+				if(columnsValArr.indexOf(index) != -1){  
+   					yArr.push(value);
+				}
+			});
+			var trace= {
+    			labels: columnsNameArr,
+    			values: yArr,
+    			type: 'pie'
+  			}
+			
+  			data.push(trace);
+  			
+  			var layout = {
+ 				height: 500,
+  				width: 700
+			};
+ 			
+			Plotly.newPlot('Chart6Data', data, layout);
+		}
+	});
+}
+
+//chart 6
+</script>
 
 </body>
 </html>
